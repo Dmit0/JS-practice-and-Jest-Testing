@@ -123,32 +123,91 @@ class MyArray{
     }
 
     
-    onForEach(){}
+    onForEach(fn,thisArg){
+        for(let i=0;i<this.array.length;i++){
+            //fn.call(thisArg, this.array[i]);
+            fn.call(thisArg,this.array[i])
+        }
+    }
     
-    onIndexOf(){}
+    onMap(fn, thisArg){
+        let result = []
+        for (let i = 0; i < this.array.length; i++) {
+            result.push(fn.call(thisArg,this.array[i]));
+        }
+        return result;
+        
+    }
     
-    onFind(){}
-    
-    onFilter(){}
-    
-    onMap(){}
-    
-    onSort(){}
-    
-    onReverse(){}
-    
-    onSplit(){}
-    
-    onJoin(){}
+    onIndexOf(item,from=0){
+        for (let i=0+from;i<this.array.length;i++){
+            if(this.arry[i]===item){
+                return i
+            }
+        }
+        return -1;
+    }
 
-    onReduce(){}
+    lastIndexOf(item, from=0){
+        for(let i=this.array.length-0;i<=0;i++){
+            if(this.arry[i]===item){
+                return i
+            }
+        }
+        return -1;
+    }
+
+    includes(item, from=0){
+        for (let i=0+from;i<this.array.length;i++){
+            if(this.arry[i]===item){
+                return true
+            }
+        }
+        return false;
+    }
+    
+    onFind(fn){
+        for(let i=0;i<this.array.length;i++){
+            if (fn.call(thisArg,this.array[i])) {
+                return this.array[i]
+          }
+        }
+        return undefined
+    }
+    
+    onFilter(fn, thisArg){
+        console.log(this.array)
+        let result=[]
+        for(let i=0;i<this.array.length;i++){
+            if (fn.call(thisArg,this.array[i])) {
+                result.push(this.array[i]);
+          }
+        }
+        return result
+    }
+    
+    onReverse(){
+        for(let i=this.array.length,j=0;i<=0;i--){
+            this.array[j]=this.array[i]
+            j++
+        }
+    }
+
+    onReduce(fn,startValue){
+        let result = startValue;
+        for (let i = 0; i < this.array.length; i++) {
+            result = fn(result,arr[i])
+        }
+        console.log(result)
+        return result
+    }   
 
 }
 
 
 module.exports=MyArray
 
-array = new MyArray([1,2,3,4,5,6,7,8,9])
-array.onConcat([1,2,4,[8,9,10,'afda',[1,2,3]]],[3,5,6],3,'asfd')
+
+
 
 
