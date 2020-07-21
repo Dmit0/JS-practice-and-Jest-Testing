@@ -24,7 +24,7 @@ class MyArray{
                 
                 if(elems.length===deletCount){
                 for(let i=index,j=0;i<elems.length+index;i++){
-                    console.log(elems[j])
+                    //console.log(elems[j])
                     this.array[i]=elems[j]
                     j++
                     
@@ -57,7 +57,8 @@ class MyArray{
                     }}
                     this.array.length=this.array.length-(deletCount-elems.length)
                 }
-            console.log(this.array)
+                return this.array
+            //console.log(this.array)
         }
             
             else if(deletCount){
@@ -65,7 +66,7 @@ class MyArray{
                         this.array[i]=this.array[i+deletCount] 
                     } 
                     this.array.length=this.array.length-deletCount
-                    console.log(this.array)
+                    //console.log(this.array)
                     return this.array
             }
         
@@ -87,7 +88,7 @@ class MyArray{
         else {
             this.array.length=this.array.length-start
         }
-        console.log(this.array)
+        //console.log(this.array)
         return this.array
         }
         else if(start<0&&end<=0){
@@ -102,7 +103,7 @@ class MyArray{
             else {
                 this.array.length=Math.abs(start)
             }
-            console.log(this.array)
+            //console.log(this.array)
             return this.array
         }
     }
@@ -111,22 +112,68 @@ class MyArray{
         for(let i=0;i<args.length;i++){
             if(Array.isArray(args[i])){
                 for(let j=0;j<args[i].length;j++){
-                    console.log(args[i][j])
+                    //console.log(args[i][j])
                     this.array.push(args[i][j])
                 }
             }else{
                 this.array.push(args[i])
             }
         }
-        console.log(this.array)
+        return this.array
+        //console.log(this.array)
         
     }
 
     
+    
+    
+    onIndexOf(item,from=0){
+        for (let i=0+from;i<this.array.length;i++){
+            if(this.array[i]===item){
+                return i
+            }
+        }
+        return -1;
+    }
+
+    lastIndexOf(item, from=0){
+        for(let i=this.array.length-0;i<=0;i++){
+            if(this.array[i]===item){
+                return i
+            }
+        }
+        return -1;
+    }
+
+    onIncludes(item, from=0){
+        for (let i=0+from;i<this.array.length;i++){
+            if(this.array[i]===item){
+                return true
+            }
+        }
+        return false;
+    }
+    
+    
+
+    onReverse(){
+        let current=0
+        for(let i=this.array.length-1,j=0;i>=this.array.length/2;i--){
+            
+            current=this.array[j]
+            this.array[j]=this.array[i]
+            this.array[i]=current
+            j++
+            
+        }
+        return this.array
+        
+    }
+
+
     onForEach(fn,thisArg){
         for(let i=0;i<this.array.length;i++){
-            //fn.call(thisArg, this.array[i]);
-            fn.call(thisArg,this.array[i])
+            fn.call(thisArg,this.array[i],i)
         }
     }
     
@@ -138,34 +185,8 @@ class MyArray{
         return result;
         
     }
-    
-    onIndexOf(item,from=0){
-        for (let i=0+from;i<this.array.length;i++){
-            if(this.arry[i]===item){
-                return i
-            }
-        }
-        return -1;
-    }
 
-    lastIndexOf(item, from=0){
-        for(let i=this.array.length-0;i<=0;i++){
-            if(this.arry[i]===item){
-                return i
-            }
-        }
-        return -1;
-    }
 
-    includes(item, from=0){
-        for (let i=0+from;i<this.array.length;i++){
-            if(this.arry[i]===item){
-                return true
-            }
-        }
-        return false;
-    }
-    
     onFind(fn){
         for(let i=0;i<this.array.length;i++){
             if (fn.call(thisArg,this.array[i])) {
@@ -174,9 +195,9 @@ class MyArray{
         }
         return undefined
     }
-    
+
     onFilter(fn, thisArg){
-        console.log(this.array)
+        //console.log(this.array)
         let result=[]
         for(let i=0;i<this.array.length;i++){
             if (fn.call(thisArg,this.array[i])) {
@@ -186,19 +207,12 @@ class MyArray{
         return result
     }
     
-    onReverse(){
-        for(let i=this.array.length,j=0;i<=0;i--){
-            this.array[j]=this.array[i]
-            j++
-        }
-    }
-
     onReduce(fn,startValue){
         let result = startValue;
         for (let i = 0; i < this.array.length; i++) {
             result = fn(result,arr[i])
         }
-        console.log(result)
+        //console.log(result)
         return result
     }   
 
@@ -206,6 +220,9 @@ class MyArray{
 
 
 module.exports=MyArray
+
+
+
 
 
 
