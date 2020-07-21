@@ -116,12 +116,6 @@ class Lodash {
             return obj
         },{})
     }
-    
-    partition(){}
-    
-    curry(){}
-    
-    at(){}
 }
 
 
