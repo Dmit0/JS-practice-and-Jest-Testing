@@ -63,19 +63,59 @@ class Lodash {
                 }
             }
             else{newmas.push(mas[i])}
-            
-
         }
         return newmas
     }
+
     
-    flattenDeep(){}
+    flatten_deep(mas){
+        
+        let _ = new Lodash
+
+        let newmas=[]
+        let flag=false;
+        for(let i=0;i<mas.length;i++){
+            
+            if(Array.isArray(mas[i])){
+                for(let j=0;j<mas[i].length;j++){
+                    newmas.push(mas[i][j])
+                    flag=true
+                }
+            }
+            else if(!Array.isArray(mas[i])){
+                newmas.push(mas[i])
+                
+            }
+            if(i===mas.length-1 && !Array.isArray(mas[i]) && flag===false){
+                //console.log(mas)
+                return mas
+            }
+        }
+        
+        _.flatten_deep(newmas)
+    }
     
-    join(){}
+    countBy(array,fn){
+        return array.reduce((obj,item)=>{
+            const key = typeof fn==='function' ?fn(item):item[fn]
+            if(!obj[key]){
+                obj[key]=0
+            }
+            obj[key]++
+            return obj
+        },{})
+    }
     
-    countBy(){}
-    
-    groupBy(){}
+    groupBy(array,fn){
+        return array.reduce((obj,item)=>{
+            const key = typeof fn==='function' ?fn(item):item[fn]
+            if(!obj[key]){
+                obj[key]=[]
+            }
+            obj[key].push(item)
+            return obj
+        },{})
+    }
     
     partition(){}
     
@@ -84,7 +124,8 @@ class Lodash {
     at(){}
 }
 
+
 module.exports=Lodash
 
-let _ = new Lodash
-console.log(_.flatten([1, [2, [3, [4]], 5]]))
+
+
